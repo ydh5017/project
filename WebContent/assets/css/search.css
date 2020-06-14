@@ -1,0 +1,43 @@
+@charset "utf-8";
+.search_container_area {padding-bottom: 120px;}
+/* .search_container_area .movie_info .btn_area {position:relative; margin-top:20px;} */
+.search_container_area .movie_info .ib_info {padding:5px 30px 0 0;}
+.search_container_area .sm_title {margin:40px 0 20px;}
+.search_container_area .movie_info .ib_txt_info {padding-bottom:10px;}
+.search_container_area .movie_info .ib_txt_info span {margin-left:5px; margin-right:5px; font-size:13px; line-height:15px;}
+.search_container_area .movie_info .ib_txt_info span:first-child {margin-left:0;}
+.search_container_area .movie_info .ib_tit {line-height:20px; font-size:18px; padding-bottom:15px;}
+.search_container_area .movie_info.big .ib_thumb, .search_container_area .movie_info .ib_thumb {background:#e5e5e5;}
+.search_cont .head_top_title + .ms_search_box {margin-top: 0px;}
+
+.search_tab_area {margin-top:70px;}
+.unified_search_area {padding-top:50px;}
+.un_serch_block {border-top:1px solid #e5e5e5;}
+.un_serch_block:first-child {padding-bottom: 0;border:none;}
+.un_serch_block:last-child {padding-bottom: 0;}
+.un_serch_block:first-child .sm_title {margin-top:0;}
+.un_serch_block .sm_title + .tbl_type {margin:10px 0 30px;}
+.un_serch_block .tbl_type {margin-top:60px;}
+.un_serch_block .mg_box {margin-top: 80px;}
+.un_serch_block .mg_box:nth-child(1),
+.un_serch_block .mg_box:nth-child(2),
+.un_serch_block .mg_box:nth-child(3) {margin-top: 0;}
+
+.un_serch_block .movie_info .btn_defaultS {width:88px;}
+.un_serch_block .search_more  {margin:70px 0;text-align:center;}
+.un_serch_block .search_more a {color:#777;border-bottom:1px solid #777;} 
+
+.un_serch_block .movie_info.big {margin-bottom:50px;}
+.un_serch_block .magazine_area + .search_more  {margin-bottom: 0;}
+.un_serch_block .magazine_area .mg_info_box .mg_de_txt {text-overflow: ellipsis;overflow:hidden;white-space: nowrap;}
+
+
+.no_search_data {margin:auto;padding-top: 10px;width:454px; font-size:14px;}
+.no_search_data .ns_tit {padding-bottom: 50px;font-size:18px;font-weight: bold;color:#2b2b2b; text-align:center;}
+
+.movie_info.big .ib_info {width:  calc(100% - 186px);}
+
+/*2019.11.06 sewon*/
+.movie_info .ib_info {width:400px;}
+.ib_tit,.ib_txt {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.sch_noImg{display: block;position: absolute;top: 50%;left: 50%;width: 40% !important;transform: translate3d(-50%, -50%, 0px);}
