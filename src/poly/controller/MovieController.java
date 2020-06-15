@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,7 @@ public class MovieController {
     private IMovieService movieService;
 
     @Resource(name = "ReviewService")
-    private IReviewService reviewservice;
+    private IReviewService reviewService;
 
     /**
      * 예매순위 수집
@@ -117,45 +118,21 @@ public class MovieController {
 
         model.addAttribute("mList", mList);
 
+        HashMap<String, String> rMap = new HashMap<>();
+        rMap.put("mid", mid);
+        List<ReviewDTO> rList = new ArrayList<>();
+
+        try {
+            rList = reviewService.getReviewList(rMap);
+            log.info(rList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("rList", rList);
+
         log.info(this.getClass().getName() + ".getMovieDetail End");
 
         return "movie/movieDetail";
-    }
-
-    @RequestMapping(value = "/ReviewAdd")
-    public String ReviewAdd(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-        String reg_id = (String) session.getAttribute("SS_userEmail");
-        String user_seq = (String) session.getAttribute("SS_userSeq");
-        String mid = request.getParameter("mid");
-        String content = request.getParameter("content");
-
-        log.info("mid : " + mid);
-        log.info("reg_id : " + reg_id);
-        log.info("user_seq : " + user_seq);
-        log.info("content : " + content);
-
-        ReviewDTO rDTO = new ReviewDTO();
-
-        rDTO.setMovie_id(mid);
-        rDTO.setContent(content);
-        rDTO.setReg_id(reg_id);
-        rDTO.setUser_seq(user_seq);
-
-        int result = 0;
-
-        String msg, url;
-        result = reviewservice.reviewAdd(rDTO);
-        log.info("result : " + result);
-        if (result == 1) {
-            msg = "리뷰를 등록하였습니다.";
-            url = "movieDetail.do?mid" + mid;
-        } else {
-            msg = "리뷰를 등록에 실패하였습니다.";
-            url = "movieDetail.do?mid" + mid;
-        }
-        model.addAttribute("msg", msg);
-        model.addAttribute("url", url);
-
-        return "/redirect";
     }
 }

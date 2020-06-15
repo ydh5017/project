@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.ReviewMapper">
+    <!-- 리뷰 추가 -->
+    <insert id="reviewAdd" parameterType="ReviewDTO">
+	INSERT
+	INTO REVIEW
+	(
+		MOVIE_ID,
+		USER_SEQ,
+		CONTENT,
+		REG_ID,
+		REG_DT
+	)
+	VALUES
+	(
+		#{movie_id},
+		#{user_seq},
+		#{content},
+		#{reg_id},
+		SYSDATE()
+	)
+</insert>
+
+	<!-- 리뷰 확인 -->
+	<select id="getReviewList" resultType="ReviewDTO" parameterType="map">
+	SELECT
+		REVIEW_SEQ AS review_seq,
+		USER_SEQ AS user_seq,
+		MOVIE_ID AS movie_id,
+		CONTENT AS content,
+		REG_DT AS reg_dt,
+		REG_ID AS reg_id
+	FROM
+		REVIEW
+	WHERE
+		MOVIE_ID = #{mid}
+	ORDER BY REVIEW_SEQ DESC
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewDel" parameterType="integer">
+	DELETE
+		FROM
+			REVIEW
+		WHERE
+			REVIEW_SEQ = #{review_seq}
+	</delete>
+
+	<!-- 리뷰 수정 -->
+	<update id="reviewMod" parameterType="ReviewDTO">
+	UPDATE
+		REVIEW
+	SET
+			CONTENT = #{content},
+			CHG_DT = SYSDATE(),
+	WHERE
+		REVIEW_SEQ =#{review_seq}
+</update>
+</mapper>

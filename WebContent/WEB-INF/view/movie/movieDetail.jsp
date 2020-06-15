@@ -2,8 +2,14 @@
          pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
 <%@page import="poly.dto.MovieDetailDTO" %>
+<%@ page import="poly.dto.ReviewDTO" %>
 <%
     List<MovieDetailDTO> mList = (List<MovieDetailDTO>)request.getAttribute("mList");
+    List<ReviewDTO> rList = (List<ReviewDTO>)request.getAttribute("rList");
+    String user_seq = (String)session.getAttribute("SS_userSeq");
+    if (user_seq == null) {
+        user_seq = "0";
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -110,9 +116,10 @@
                                                 class="bg_star"></span></span><span class="star_num" id="star_num">8.1</span></div>
                                     </div>
                                     <div class="ag_cont">
-                                        <textarea name="" id="gradeTxt" placeholder="별점을 먼저 선택하신 후, 감상을 남겨주세요.
+                                        <textarea name="gradeTxt" id="gradeTxt" placeholder="별점을 먼저 선택하신 후, 감상을 남겨주세요.
 욕설, 비속어, 타인을 비방하는 문구를 사용하시면 운영자가 임의로 삭제할 수 있습니다.
 최대 1,500자 작성가능(공백포함)"></textarea>
+                                        <input type="hidden" name="mid" id="mid" value="<%=mList.get(0).getMid()%>">
                                         <button type="submit" class="btn_grade_add" id="btnReg">등록</button>
                                     </div>
                                 </div>
@@ -146,6 +153,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% for (int i = 0; i < rList.size(); i++) { %>
                             <div class="movie_grade_area" id="movie_grade_area">
                                 <div class="all_grade_cont white_box" id="all_grade_cont_white_box">
                                     <div class="ag_cont_box">
@@ -158,14 +166,28 @@
                                                     class="bg_star"></span></span><span class="star_num" id="star_num">9</span></div>
                                         </div>
                                         <div class="ag_cont" id="gradeList">
-                                            <p class="ag_text" id="gradeListComment1" style="display:block;">tlqkf</p>
-                                            <p class="ag_text" id="gradeListCommentFull1" style="display:none;">tlqkf</p>
-                                            <p class="ag_writer"><span class="writer">zfan11</span><span class="date">2018.04.07</span>
+                                            <p class="ag_text" id="gradeListComment1" style="display:block;"><%=rList.get(i).getContent()%></p>
+                                            <p class="ag_text" id="gradeListCommentFull1" style="display:none;"><%=rList.get(i).getContent()%></p>
+                                            <p class="ag_writer"><span class="writer"><%=rList.get(i).getReg_id()%></span><span class="date"><%=rList.get(i).getReg_dt()%></span>
                                             </p>
+                                            <% if (user_seq.equals(rList.get(i).getUser_seq()) || userAss.equals("1")) {%>
+                                            <div class="like_type">
+                                                <form action="/reviewDel.do" id="rd<%=i%>">
+                                                    <input type="hidden" name="Rno" value="<%=rList.get(i).getReview_seq()%>">
+                                                    <a style="float: right" onclick="return rDel(<%=i%>)">삭제</a>
+                                                    <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
+                                                </form>
+                                                &nbsp;
+                                                <p style="float: right">/</p>
+                                                &nbsp;
+                                                <a style="float: right">수정</a>
+                                            </div>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <% } %>
                         </div>
                         <!-- // 평점-->
                         <div class="btn_bottom_area" id="btnMore">
@@ -246,10 +268,26 @@
 
         if (content.value == "") {
             alert("내용을 입력해 주세요.");
-            $('#gradeTxt').gradeTxt('focus');
+            $('#gradeTxt').focus();
             return false;
         }
-    }
+        if (<%=user_seq%> == "0") {
+            alert("로그인 후 이용해주세요");
+            $('#gradeTxt').focus();
+            return false;
+        }
+    };
+    function rDel(i){
+        var result;
+        console.log(i);
+        result = confirm("리뷰를 삭제하시겠습니까?");
+        console.log(result);
+        if (result){
+            $('#rd'+i).submit();
+        }else{
+            alert("취소되었습니다.");
+        }
+    };
 </script>
 
 </body>
