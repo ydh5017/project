@@ -90,16 +90,17 @@ public class ReviewController {
 
         ReviewDTO rDTO = new ReviewDTO();
 
-        String content = request.getParameter("content");
-        rDTO.setReview_seq(request.getParameter("review_seq"));
-        rDTO.setChg_id((String)session.getAttribute("SS_userSeq"));
+        String content = request.getParameter("RMcontent");
+        String review_seq = request.getParameter("review_seq");
+        rDTO.setReview_seq(review_seq);
         rDTO.setContent(content);
 
-        int res=0;
+        int res = 0;
 
         String mid = request.getParameter("mid");
 
         log.info("mid : " + mid);
+        log.info("review_seq : " +review_seq);
         log.info("content : " + content);
 
         String msg, url;

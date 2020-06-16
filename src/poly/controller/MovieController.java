@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.MovieDTO;
 import poly.dto.MovieDetailDTO;
+import poly.dto.MyMovieDTO;
 import poly.dto.ReviewDTO;
 import poly.service.IMovieService;
+import poly.service.IMyMovieService;
 import poly.service.IReviewService;
 
 import javax.annotation.Resource;
@@ -29,6 +31,9 @@ public class MovieController {
 
     @Resource(name = "ReviewService")
     private IReviewService reviewService;
+
+    @Resource(name = "MyMovieService")
+    private IMyMovieService myMovieService;
 
     /**
      * 예매순위 수집
@@ -108,7 +113,9 @@ public class MovieController {
     public String movieDetail(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception {
 
         String mid = request.getParameter("mid");
+        String user_seq = (String) session.getAttribute("SS_userSeq");
         log.info("mid : " + mid);
+        log.info("user_seq : " + user_seq);
 
         log.info(this.getClass().getName() + ".getMovieDetail Start");
 
@@ -130,6 +137,19 @@ public class MovieController {
         }
 
         model.addAttribute("rList", rList);
+
+        HashMap<String, String> yMap = new HashMap<>();
+        yMap.put("mid", mid);
+        yMap.put("user_seq", user_seq);
+        List<MyMovieDTO> yList = new ArrayList<>();
+        try {
+            yList = myMovieService.mymovieCheck(yMap);
+            log.info(yList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("yList", yList);
 
         log.info(this.getClass().getName() + ".getMovieDetail End");
 

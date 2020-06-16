@@ -30,7 +30,8 @@
 		MOVIE_ID AS movie_id,
 		CONTENT AS content,
 		REG_DT AS reg_dt,
-		REG_ID AS reg_id
+		REG_ID AS reg_id,
+		CHG_DT AS chg_dt
 	FROM
 		REVIEW
 	WHERE
@@ -53,7 +54,7 @@
 		REVIEW
 	SET
 			CONTENT = #{content},
-			CHG_DT = SYSDATE(),
+			CHG_DT = SYSDATE()
 	WHERE
 		REVIEW_SEQ =#{review_seq}
 </update>

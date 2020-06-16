@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.MyMovieMapper">
+    <!-- 나의 영화 추가 -->
+    <insert id="mymovieAdd" parameterType="mymovieDTO">
+        INSERT
+        INTO MYMOVIE
+        (
+            USER_SEQ,
+            MOVIE_ID,
+            TITLE,
+            MV_INFO,
+            DIRECTOR,
+            ACTOR,
+            IMAGE,
+            BACKIMG,
+            H_CONTEXT,
+            CONTEXT
+        )
+        VALUES
+        (
+            #{user_seq},
+            #{movie_id},
+            #{title},
+            #{mv_info},
+            #{director},
+            #{actor},
+            #{image},
+            #{backimg},
+            #{h_context},
+            #{context}
+        )
+    </insert>
+    <!-- 나의 영화 등록 확인 -->
+    <select id="mymovieCheck" resultType="MyMovieDTO" parameterType="map">
+        SELECT
+            MYMOVIE_SEQ AS mymovie_seq
+        FROM
+            MYMOVIE
+        WHERE
+            MOVIE_ID = #{mid} AND USER_SEQ = #{user_seq}
+    </select>
+</mapper>
