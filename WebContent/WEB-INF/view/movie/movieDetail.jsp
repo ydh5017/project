@@ -8,10 +8,6 @@
     List<MovieDetailDTO> mList = (List<MovieDetailDTO>)request.getAttribute("mList");
     List<ReviewDTO> rList = (List<ReviewDTO>)request.getAttribute("rList");
     List<MyMovieDTO> yList = (List<MyMovieDTO>)request.getAttribute("yList");
-    String mymovie_seq = yList.get(0).getMymovie_seq();
-    if (mymovie_seq == null) {
-        mymovie_seq = "0";
-    }
 
     String user_seq = (String)session.getAttribute("SS_userSeq");
     if (user_seq == null) {
@@ -82,34 +78,27 @@
                     <p class="dmb_txt"><span><%=mList.get(0).getMv_info()%></span></p>
                     <p class="dmb_txt"><span>감독 | <%=mList.get(0).getDirector()%> </span><span>출연 | <%=mList.get(0).getActor()%> </span></p>
                     <input type="hidden" value="<%=mList.get(0).getMid()%>">
-                    <% if (user_seq == "0") {}else {%>
-                    <% if (yList.get(0).getMymovie_seq() == "0") {%>
+                    <% if (user_seq == "0") {}else { %>
+                    <% if (yList.size() != 0) {%>
+                    <form action="/mymovieDel.do" method="post">
+                        <p class="dmb_txt"><input type="submit" class="btn_defaultB" value="나의 영화 등록취소"></p>
+                        <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
+                        <input type="hidden" name="mymovie_seq" value="<%=yList.get(0).getMymovie_seq()%>">
+                    </form>
+                    <% } else  { %>
                     <form action="/mymovieAdd.do" method="post">
-                    <p class="dmb_txt"><input type="submit" class="btn_defaultB" value="나의 영화 등록"></p>
-                    <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
-                    <input type="hidden" name="title" value="<%=mList.get(0).getTitle()%>">
-                    <input type="hidden" name="mv_info" value="<%=mList.get(0).getMv_info()%>">
-                    <input type="hidden" name="director" value="<%=mList.get(0).getDirector()%>">
-                    <input type="hidden" name="actor" value="<%=mList.get(0).getActor()%>">
-                    <input type="hidden" name="image" value="<%=mList.get(0).getImage()%>">
-                    <input type="hidden" name="backimg" value="<%=mList.get(0).getBackimg()%>">
-                    <input type="hidden" name="h_context" value="<%=mList.get(0).getH_context()%>">
-                    <input type="hidden" name="context" value="<%=mList.get(0).getContext()%>">
+                        <p class="dmb_txt"><input type="submit" class="btn_defaultB" value="나의 영화 등록"></p>
+                        <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
+                        <input type="hidden" name="title" value="<%=mList.get(0).getTitle()%>">
+                        <input type="hidden" name="mv_info" value="<%=mList.get(0).getMv_info()%>">
+                        <input type="hidden" name="director" value="<%=mList.get(0).getDirector()%>">
+                        <input type="hidden" name="actor" value="<%=mList.get(0).getActor()%>">
+                        <input type="hidden" name="image" value="<%=mList.get(0).getImage()%>">
+                        <input type="hidden" name="backimg" value="<%=mList.get(0).getBackimg()%>">
+                        <input type="hidden" name="h_context" value="<%=mList.get(0).getH_context()%>">
+                        <input type="hidden" name="context" value="<%=mList.get(0).getContext()%>">
                     </form>
-                    <% } else { %>
-                    <form action="" method="post">
-                    <p class="dmb_txt"><input type="submit" class="btn_defaultB" value="나의 영화 등록취소"></p>
-                    <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
-                    <input type="hidden" name="title" value="<%=mList.get(0).getTitle()%>">
-                    <input type="hidden" name="mv_info" value="<%=mList.get(0).getMv_info()%>">
-                    <input type="hidden" name="director" value="<%=mList.get(0).getDirector()%>">
-                    <input type="hidden" name="actor" value="<%=mList.get(0).getActor()%>">
-                    <input type="hidden" name="image" value="<%=mList.get(0).getImage()%>">
-                    <input type="hidden" name="backimg" value="<%=mList.get(0).getBackimg()%>">
-                    <input type="hidden" name="h_context" value="<%=mList.get(0).getH_context()%>">
-                    <input type="hidden" name="context" value="<%=mList.get(0).getContext()%>">
-                    </form>
-                    <% }} %>
+                    <% } } %>
                 </div>
             </div>
         </div>

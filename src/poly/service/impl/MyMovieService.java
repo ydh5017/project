@@ -27,4 +27,19 @@ public class MyMovieService implements IMyMovieService {
     public List<MyMovieDTO> mymovieCheck(HashMap<String, String> yMap) throws Exception {
         return myMovieMapper.mymovieCheck(yMap);
     }
+
+    @Override
+    public int mymovieDel(MyMovieDTO mDTO) throws Exception {
+        return myMovieMapper.mymovieDel(mDTO);
+    }
+
+    @Override
+    public List<MyMovieDTO> getMyMovieList(String user_seq) throws Exception {
+        return myMovieMapper.getMyMovieList(user_seq);
+    }
+
+    @Override
+    public int mymovieListDel(MyMovieDTO mDTO) throws Exception {
+        return myMovieMapper.mymovieListDel(mDTO);
+    }
 }

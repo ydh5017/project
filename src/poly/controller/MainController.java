@@ -5,11 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import poly.dto.MovieDTO;
+import poly.dto.MyMovieDTO;
 import poly.service.IMovieService;
+import poly.service.IMyMovieService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class MainController {
 
     @Resource(name = "MovieService")
     private IMovieService movieService;
+
+    @Resource(name = "MyMovieService")
+    private IMyMovieService myMovieService;
 
     /**
      * 영화 예매순위
@@ -57,8 +63,16 @@ public class MainController {
     }
 
     @RequestMapping(value = "mymovie")
-    public  String myMovie(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info(this.getClass());
+    public  String myMovie(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception {
+
+        String user_seq = (String) session.getAttribute("SS_userSeq");
+        log.info("user_seq : " + user_seq);
+
+        List<MyMovieDTO> mList = myMovieService.getMyMovieList(user_seq);
+
+        log.info("mList : " + mList.size());
+
+        model.addAttribute("mList", mList);
 
         return "/mymovie";
     }

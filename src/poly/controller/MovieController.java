@@ -136,6 +136,8 @@ public class MovieController {
             e.printStackTrace();
         }
 
+        log.info("rList : " + rList.size());
+
         model.addAttribute("rList", rList);
 
         HashMap<String, String> yMap = new HashMap<>();
@@ -149,10 +151,42 @@ public class MovieController {
             e.printStackTrace();
         }
 
+        log.info("yList : " + yList.size());
+
         model.addAttribute("yList", yList);
 
         log.info(this.getClass().getName() + ".getMovieDetail End");
 
         return "movie/movieDetail";
+    }
+
+    @RequestMapping(value = "/MYmovieDetail")
+    public String MYmovieDetail(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception {
+
+        String mid = request.getParameter("mid");
+        String user_seq = (String) session.getAttribute("SS_userSeq");
+        log.info("mid : " + mid);
+        log.info("user_seq : " + user_seq);
+
+        log.info(this.getClass().getName() + ".getMovieDetail Start");
+
+        List<MovieDetailDTO> mList = movieService.getMovieInfo(mid);
+
+        log.info("mList : " + mList.size());
+
+        String msg, url;
+
+        if (mList == null){
+            msg = "현재 상영중인 영화가 아닙니다.";
+            url = "/mymovie.do";
+        }else {
+            msg = "ㄱㄱ";
+            url = "/movieDetail.do?mid=" + mid;
+        }
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
+
+
+        return "/redirect";
     }
 }

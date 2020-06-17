@@ -51,16 +51,22 @@ public class MovieService implements IMovieService {
             Element movieInfo = MovieRankList.next();
 
             String mid2 = movieInfo.select("a").attr("href"); // 영화 번호
-            String image = movieInfo.select("img").attr("src"); // 영화 이미지
+//            String image = movieInfo.select("img").attr("src"); // 영화 이미지
             String title = movieInfo.select("strong.tit").text(); // 영화 제목
             String ticket = movieInfo.select("span.dsc em.num").text(); // 예매율
             rank++;
-
 
             System.out.println(mid2);
             String[] mids = mid2.split("=");
             String mid = mids[1];
             System.out.println(mid);
+            log.info("mid : " + mid);
+
+            String url2 = "https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=" + mid;
+            Document doc2 = null;
+            doc2 = Jsoup.connect(url2).get();
+            Elements element2 = doc2.select("body");
+            String image = element2.select("div a img").attr("src");
 
             movieInfo = null;
 
@@ -130,12 +136,16 @@ public class MovieService implements IMovieService {
             log.info("mid : " + mid);
 
             String url = "https://movie.naver.com/movie/bi/mi/basic.nhn?code=" + mid;
+            String url2 = "https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=" + mid;
 
             Document doc = null;
+            Document doc2 = null;
 
             doc = Jsoup.connect(url).get();
+            doc2 = Jsoup.connect(url2).get();
 
             Elements element = doc.select("div.article");
+            Elements element2 = doc2.select("body");
 
             String titles = element.select("div.wide_info_area div.mv_info h3.h_movie a").text();
             String mv_infos = element.select("div.wide_info_area div.mv_info p.info_spec").text();
@@ -143,7 +153,8 @@ public class MovieService implements IMovieService {
             String actor = element.select("div.info_spec2 dl.step2 dd a").text();
             String h_context = element.select("div.story_area h5.h_tx_story").text();
             String context = element.select("div.story_area p.con_tx").text();
-            String image = element.select("div.poster a img").attr("src");
+//            String image = element.select("div.poster a img").attr("src");
+            String image = element2.select("div a img").attr("src");
             String backimg = element.select("div.viewer_img img").attr("src");
 
             String[] title2 = titles.split("상영중");

@@ -61,8 +61,8 @@
             <ul>
                 <li class="active"><a href="/index.do">Home</a></li>
                 <li><a href="/serch.do">영화 검색</a></li>
-                <li><a href="/mymovie.do">나의 영화</a></li>
                 <% if (userEmail != null) { %>
+                <li><a href="/mymovie.do">나의 영화</a></li>
                 <li><a href="/userDetail.do">마이페이지</a></li>
                 <% } %>
 

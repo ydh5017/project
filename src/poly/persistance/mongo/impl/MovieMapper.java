@@ -253,6 +253,7 @@ public class MovieMapper implements IMovieMapper {
 
 
             final DBObject current = cursor.next();
+            log.info("current : " + current);
 
             String collect_time = CmmUtil.nvl((String) current.get("collect_time"));
             String mId = CmmUtil.nvl((String) current.get("mid"));
