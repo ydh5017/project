@@ -173,15 +173,16 @@ public class MovieController {
         List<MovieDetailDTO> mList = movieService.getMovieInfo(mid);
 
         log.info("mList : " + mList.size());
+        log.info("mList : " + mList);
 
         String msg, url;
 
-        if (mList == null){
-            msg = "현재 상영중인 영화가 아닙니다.";
-            url = "/mymovie.do";
-        }else {
+        if (mid.equals(String.valueOf(mList.get(0).getMid()))){
             msg = "ㄱㄱ";
             url = "/movieDetail.do?mid=" + mid;
+        } else {
+            msg = "현재 상영중인 영화가 아닙니다.";
+            url = "/mymovie.do";
         }
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);

@@ -61,18 +61,72 @@
 			<!-- Slide 1 -->
 			<div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg);">
 				<div class="carousel-container">
+					<% for (int i = 0; i < 5; i++) {%>
+					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
+						<div class="img_thumb">
+							<img src="<%=rList.get(i).getImage() %>">
+							<span class="rank_num"><%=rList.get(i).getRank() %></span>
+							<div class="over_dmm">
+							</div>
+						</div>
+						<div class="mv_info">
+							<p class="mv_tit">
+								<%=rList.get(i).getTitle() %>
+							</p>
+							<p class="mv_txt">
+								<span>예매율 : <%=rList.get(i).getTicket() %> </span>
+							</p>
+						</div>
+					</div>
+					<% } %>
 				</div>
 			</div>
 
 			<!-- Slide 2 -->
 			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-2.jpg);">
 				<div class="carousel-container">
+					<% for (int i = 5; i < 10; i++) {%>
+					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
+						<div class="img_thumb">
+							<img src="<%=rList.get(i).getImage() %>">
+							<span class="rank_num"><%=rList.get(i).getRank() %></span>
+							<div class="over_dmm">
+							</div>
+						</div>
+						<div class="mv_info">
+							<p class="mv_tit">
+								<%=rList.get(i).getTitle() %>
+							</p>
+							<p class="mv_txt">
+								<span>예매율 : <%=rList.get(i).getTicket() %> </span>
+							</p>
+						</div>
+					</div>
+					<% } %>
 				</div>
 			</div>
 
 			<!-- Slide 3 -->
 			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-3.jpg);">
 				<div class="carousel-container">
+					<% for (int i = 10; i < 15; i++) {%>
+					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
+						<div class="img_thumb">
+							<img src="<%=rList.get(i).getImage() %>">
+							<span class="rank_num"><%=rList.get(i).getRank() %></span>
+							<div class="over_dmm">
+							</div>
+						</div>
+						<div class="mv_info">
+							<p class="mv_tit">
+								<%=rList.get(i).getTitle() %>
+							</p>
+							<p class="mv_txt">
+								<span>예매율 : <%=rList.get(i).getTicket() %> </span>
+							</p>
+						</div>
+					</div>
+					<% } %>
 				</div>
 			</div>
 

@@ -230,27 +230,50 @@ public class MovieMapper implements IMovieMapper {
     public List<MovieDetailDTO> getMovieInfo(String mid) {
 
         String colNm = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
-
         log.info("colNm : " + colNm);
-
         DBCollection rCol = mongodb.getCollection(colNm);
 
         log.info("mid : " + mid);
 
         BasicDBObject mid2 = new BasicDBObject();
         mid2.put("mid", mid);
-
         log.info("mid2 : " +mid2);
 
-        Iterator<DBObject> cursor = rCol.find(mid2);
-        log.info("cursor : " + cursor);
+        Iterator<DBObject> movieList = rCol.find();
+        log.info("movieList : " + movieList);
+
+        List<MovieDetailDTO> cList = new ArrayList<MovieDetailDTO>();
+        MovieDetailDTO cDTO = null;
+
+        while (movieList.hasNext()) {
+            cDTO = new MovieDetailDTO();
+
+            final DBObject movie_info = movieList.next();
+
+            String midList = CmmUtil.nvl((String) movie_info.get("mid"));
+
+            cDTO.setMid(midList);
+
+            cList.add(cDTO);
+
+            cDTO = null;
+        }
+        log.info("cList : " + cList.size());
+
+        List<String> midArr = new ArrayList<>();
+
+        for(int a=0;a<cList.size();a++) {
+
+            midArr.add(cList.get(a).getMid());
+        }
 
         List<MovieDetailDTO> mList = new ArrayList<MovieDetailDTO>();
-
         MovieDetailDTO mDTO = null;
 
-        mDTO = new MovieDetailDTO();
-
+        if (midArr.contains(mid)) {
+            mDTO = new MovieDetailDTO();
+            Iterator<DBObject> cursor = rCol.find(mid2);
+            log.info("cursor : " + cursor);
 
             final DBObject current = cursor.next();
             log.info("current : " + current);
@@ -292,8 +315,76 @@ public class MovieMapper implements IMovieMapper {
 
             mDTO = null;
 
+        } else if (!midArr.contains(mid)){
+            mDTO = new MovieDetailDTO();
+            mDTO.setMid("0");
+            mList.add(mDTO);
+        }
+
         log.info("mList : " + mList.size());
 
         return mList;
+    }
+
+    @Override
+    public List<MovieDetailDTO> getMovieSerch(String keyword) throws Exception {
+
+        log.info(this.getClass().getName() + ".getMovieSerch Start");
+        String colNm = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
+
+        DBCollection rCol = mongodb.getCollection(colNm);
+
+        if (keyword == ""){
+            keyword = null;
+        }
+
+        BasicDBObject query = new BasicDBObject();
+        query.put("title", new BasicDBObject("$regex", keyword+".*"));
+
+        Iterator<DBObject> cursor = rCol.find(query);
+
+        List<MovieDetailDTO> sList = new ArrayList<MovieDetailDTO>();
+
+        MovieDetailDTO sDTO = null;
+
+        while (cursor.hasNext()) {
+
+            sDTO = new MovieDetailDTO();
+
+            final DBObject current = cursor.next();
+
+            String collect_time = CmmUtil.nvl((String) current.get("collect_time"));
+            String mid = CmmUtil.nvl((String) current.get("mid"));
+            String title = CmmUtil.nvl((String) current.get("title"));
+            String mv_info = CmmUtil.nvl((String) current.get("mv_info"));
+            String director = CmmUtil.nvl((String) current.get("director"));
+            String actor = CmmUtil.nvl((String) current.get("actor"));
+            String h_context = CmmUtil.nvl((String) current.get("h_context"));
+            String context = CmmUtil.nvl((String) current.get("context"));
+            String image = CmmUtil.nvl((String) current.get("image"));
+            String backimg = CmmUtil.nvl((String) current.get("backimg"));
+
+            sDTO.setCollect_time(collect_time);
+            sDTO.setMid(mid);
+            sDTO.setTitle(title);
+            sDTO.setMv_info(mv_info);
+            sDTO.setDirector(director);
+            sDTO.setActor(actor);
+            sDTO.setH_context(h_context);
+            sDTO.setContext(context);
+            sDTO.setImage(image);
+            sDTO.setBackimg(backimg);
+
+            sList.add(sDTO);
+
+            sDTO = null;
+        }
+
+        log.info("sList : " + sList.size());
+        log.info("sList : " + sList);
+
+        log.info(this.getClass().getName() + "getMovieSerch End");
+
+        return sList;
     }
 }

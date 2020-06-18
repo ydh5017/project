@@ -43,4 +43,5 @@ public interface IMovieMapper {
      */
     public List<MovieDetailDTO> getMovieInfo(String mid) throws Exception;
 
+    List<MovieDetailDTO> getMovieSerch(String keyword) throws Exception;
 }

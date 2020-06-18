@@ -185,6 +185,26 @@ public class MovieService implements IMovieService {
             pDTO.setImage(image);
             pDTO.setBackimg(backimg);
 
+      /*      List<MovieDTO> RList = movieMapper.getRank(colNm);
+
+            if (RList == null) {
+                RList = new ArrayList<MovieDTO>();
+            }
+            List<String> TitleArr = new ArrayList<String>();
+            for(int a=0;a<RList.size();a++) {
+
+                TitleArr.add(RList.get(a).getTitle());
+            }
+            if(TitleArr.contains(pDTO.getTitle())){
+                // 아직도 상영중인거
+            }else if(!TitleArr.contains(pDTO.getTitle())){
+
+            }*/
+
+
+
+
+
             dList.add(pDTO);
 
             String colNm2 = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
@@ -220,6 +240,20 @@ public class MovieService implements IMovieService {
     @Override
     public List<MovieDetailDTO> getMovieInfo(String mid) throws Exception {
         return movieMapper.getMovieInfo(mid);
+    }
+
+    @Override
+    public List<MovieDetailDTO> getMovieSerch(String keyword) throws Exception {
+
+        log.info("keyword : " + keyword);
+
+        List<MovieDetailDTO> sList = movieMapper.getMovieSerch(keyword);
+
+        if (sList == null) {
+            sList = new ArrayList<MovieDetailDTO>();
+        }
+
+        return sList;
     }
 
 }

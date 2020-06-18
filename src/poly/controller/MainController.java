@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import poly.dto.MovieDTO;
+import poly.dto.MovieDetailDTO;
 import poly.dto.MyMovieDTO;
 import poly.service.IMovieService;
 import poly.service.IMyMovieService;
@@ -56,8 +57,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "serch")
-    public  String Serch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public  String Serch(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception {
         log.info(this.getClass());
+
+        List<MovieDetailDTO> sList = new ArrayList<MovieDetailDTO>();
+        log.info("sList : " + sList.size());
+
+        model.addAttribute("sList", sList);
+
 
         return "/serch";
     }

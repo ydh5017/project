@@ -72,6 +72,11 @@
     <div class="search_container_area">
         <div class="search_cont lay_inner">
             <div class="un_serch_block" id="movieList">
+                <% if (mList.size() == 0) {%>
+                <div class="head_top_title">
+                    등록된 나의 영화가 없습니다.
+                </div>
+                <% } %>
                 <% for (int i = 0; i < mList.size(); i++) {%>
                 <div class="tbl_type">
                     <div class="tbl_col">
