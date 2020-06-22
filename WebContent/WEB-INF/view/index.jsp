@@ -59,9 +59,9 @@
 		<div class="carousel-inner" role="listbox">
 
 			<!-- Slide 1 -->
-			<div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg);">
+			<div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg)">
 				<div class="carousel-container">
-					<% for (int i = 0; i < 5; i++) {%>
+					<% if (rList.size() > 0) {for (int i = 0; i < 5; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
 						<div class="img_thumb">
 							<img src="<%=rList.get(i).getImage() %>">
@@ -78,14 +78,14 @@
 							</p>
 						</div>
 					</div>
-					<% } %>
+					<% } } %>
 				</div>
 			</div>
 
 			<!-- Slide 2 -->
 			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-2.jpg);">
 				<div class="carousel-container">
-					<% for (int i = 5; i < 10; i++) {%>
+					<% if (rList.size() > 0) { for (int i = 5; i < 10; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
 						<div class="img_thumb">
 							<img src="<%=rList.get(i).getImage() %>">
@@ -102,14 +102,14 @@
 							</p>
 						</div>
 					</div>
-					<% } %>
+					<% } } %>
 				</div>
 			</div>
 
 			<!-- Slide 3 -->
 			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-3.jpg);">
 				<div class="carousel-container">
-					<% for (int i = 10; i < 15; i++) {%>
+					<% if (rList.size() > 0) { for (int i = 10; i < 15; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
 						<div class="img_thumb">
 							<img src="<%=rList.get(i).getImage() %>">
@@ -126,7 +126,7 @@
 							</p>
 						</div>
 					</div>
-					<% } %>
+					<% } } %>
 				</div>
 			</div>
 
@@ -158,26 +158,28 @@
 				</div>
 				<div class="movie_rank_cont" id="movieRank">
 					<% for (int i = 0; i < rList.size(); i++) { %>
-					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
-						<div class="img_thumb">
-							<img src="<%=rList.get(i).getImage() %>">
-							<span class="rank_num"><%=rList.get(i).getRank() %></span>
-							<div class="over_dmm">
+						<div class="movie_info_card" style="display: none">
+							<div onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
+							<div class="img_thumb">
+								<img src="<%=rList.get(i).getImage() %>">
+								<span class="rank_num"><%=rList.get(i).getRank() %></span>
+								<div class="over_dmm">
+								</div>
+							</div>
+							<div class="mv_info">
+								<p class="mv_tit">
+									<%=rList.get(i).getTitle() %>
+								</p>
+								<p class="mv_txt">
+									<span>예매율 : <%=rList.get(i).getTicket() %> </span>
+								</p>
+							</div>
 							</div>
 						</div>
-						<div class="mv_info">
-							<p class="mv_tit">
-								<%=rList.get(i).getTitle() %>
-							</p>
-							<p class="mv_txt">
-								<span>예매율 : <%=rList.get(i).getTicket() %> </span>
-							</p>
-						</div>
-					</div>
 					<% } %>
 				</div>
 				<div class="btn_bottom_area" id="dvTicketMore">
-					<button type="button" class="btn_defaultB" onclick="javascript:fnTicketRankMore();">더보기</button>
+					<button type="button" class="btn_defaultB" id="load">더보기</button>
 				</div>
 			</div>
 		</div>
@@ -186,49 +188,8 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-
-	<div class="footer-top">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3 col-md-6 footer-contact">
-					<h3>Company</h3>
-					<p>
-						A108 Adam Street <br>
-						New York, NY 535022<br>
-						United States <br><br>
-						<strong>Phone:</strong> +1 5589 55488 55<br>
-						<strong>Email:</strong> info@example.com<br>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container d-md-flex py-4">
-
-		<div class="mr-md-auto text-center text-md-left">
-			<div class="copyright">
-				&copy; Copyright <strong><span>Company</span></strong>. All Rights Reserved
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/company-free-html-bootstrap-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
-		<div class="social-links text-center text-md-right pt-3 pt-md-0">
-			<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-			<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-			<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-			<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-			<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-		</div>
-	</div>
-</footer><!-- End Footer -->
+<%@include file="/include/footer.jsp"%>
+<!-- End Footer -->
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -245,11 +206,16 @@
 <script src="assets/vendor/aos/aos.js"></script>
 
 <script type="text/javascript">
-	function fnTicketRankMore() {
-		_pageNo += 1;
-		_pageSize = 12;
-		fnTicketList(_pageNo, _pageSize);
-	}
+	$(function () {
+		$(".movie_rank_cont .movie_info_card").slice(0, 15).show();
+		$("#load").click(function (e) {
+			e.preventDefault();
+			$(".movie_rank_cont .movie_info_card:hidden").slice(0, 15).show();
+			if ($(".movie_rank_cont .movie_info_card:hidden").length == 0) {
+				$('#load').attr('style', "display:none;");
+			}
+		})
+	})
 </script>
 
 <!-- Template Main JS File -->

@@ -104,14 +104,14 @@
                             <div class="un_serch_block" id="movieList">
                                 <p class="sm_title">영화(<%=sList.size()%>건)</p>
                                     <% for (int i = 0; i < sList.size(); i++) {%>
-                                <div class="tbl_type">
+                                <div class="tbl_type" style="display: none">
                                     <div class="tbl_col">
                                         <div class="movie_info">
-                                            <div class="ib_thumb" onclick="" style="cursor:pointer;"><img
+                                            <div class="ib_thumb" onclick="location.href='movieDetail.do?mid=<%=sList.get(i).getMid()%>'" style="cursor:pointer;"><img
                                                     src="<%=sList.get(i).getImage()%>">
                                             </div>
                                             <div class="ib_info">
-                                                <p class="ib_tit"><a href="#"><span class="col_point"><%=sList.get(i).getTitle()%></span></p>
+                                                <p class="ib_tit"><a href="movieDetail.do?mid=<%=sList.get(i).getMid()%>"><span class="col_point"><%=sList.get(i).getTitle()%></span></a></p>
                                                 <p class="ib_txt_info"> <span><%=sList.get(i).getMv_info()%></span></p>
                                                 <p class="ib_txt">감독 : <a><%=sList.get(i).getDirector()%></a></p>
                                                 <p class="ib_txt">출연 : <a><%=sList.get(i).getActor()%></a></p>
@@ -121,7 +121,7 @@
                                     </div>
                                 </div>
                                     <% } %>
-                                <div class="search_more"><a href="javascript:;" onclick="">+ 검색결과 더보기</a>
+                                <div class="search_more" id="load"><a href="">+ 검색결과 더보기</a>
                                 </div>
                             </div>
                             <% } %>
@@ -135,49 +135,8 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Company</h3>
-                    <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
-                        <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-        <div class="mr-md-auto text-center text-md-left">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Company</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/company-free-html-bootstrap-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-        <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-    </div>
-</footer><!-- End Footer -->
+<%@include file="/include/footer.jsp"%>
+<!-- End Footer -->
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -201,6 +160,17 @@
     function fnClearSch(){
         $("#serchtext").val("");
     }
+
+    $(function () {
+        $(".tbl_type").slice(0, 5).show();
+        $("#load").click(function (e) {
+            e.preventDefault();
+            $(".tbl_type:hidden").slice(0, 5).show();
+            if ($(".tbl_type:hidden").length == 0) {
+                $('#load').attr('style', "display:none;");
+            }
+        })
+    })
 </script>
 
 </body>

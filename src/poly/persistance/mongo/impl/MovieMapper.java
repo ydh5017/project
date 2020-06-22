@@ -11,7 +11,6 @@ import poly.dto.MovieDTO;
 import poly.dto.MovieDetailDTO;
 import poly.persistance.mongo.IMovieMapper;
 import poly.util.CmmUtil;
-import poly.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -229,7 +228,7 @@ public class MovieMapper implements IMovieMapper {
     @Override
     public List<MovieDetailDTO> getMovieInfo(String mid) {
 
-        String colNm = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieDetail_";
         log.info("colNm : " + colNm);
         DBCollection rCol = mongodb.getCollection(colNm);
 
@@ -330,7 +329,7 @@ public class MovieMapper implements IMovieMapper {
     public List<MovieDetailDTO> getMovieSerch(String keyword) throws Exception {
 
         log.info(this.getClass().getName() + ".getMovieSerch Start");
-        String colNm = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieDetail_";
 
         DBCollection rCol = mongodb.getCollection(colNm);
 

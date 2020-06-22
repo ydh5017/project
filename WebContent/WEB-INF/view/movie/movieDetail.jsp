@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                             <% for (int i = 0; i < rList.size(); i++) { %>
-                            <div class="movie_grade_area" id="movie_grade_area">
+                            <div class="movie_grade_area" id="movie_grade_area" style="display: none">
                                 <div class="all_grade_cont white_box" id="all_grade_cont_white_box">
                                     <div class="ag_cont_box">
                                         <div class="ag_top">
@@ -232,7 +232,7 @@
                         </div>
                         <!-- // 평점-->
                         <div class="btn_bottom_area" id="btnMore">
-                            <button type="button" class="btn_defaultB" onclick="javascript: fnMore('Y');">더보기</button>
+                            <button type="button" class="btn_defaultB" id="load">더보기</button>
                         </div>
                     </div>
                 </div>
@@ -244,47 +244,8 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Company</h3>
-                    <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
-                        <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-        <div class="mr-md-auto text-center text-md-left">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Company</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/company-free-html-bootstrap-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-        <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-    </div>
-</footer><!-- End Footer -->
+<%@include file="/include/footer.jsp"%>
+<!-- End Footer -->
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -350,6 +311,17 @@
         }
         $("#rm"+i).submit()
     }
+
+    $(function () {
+        $(".movie_grade_area").slice(0, 5).show();
+        $("#load").click(function (e) {
+            e.preventDefault();
+            $(".movie_grade_area:hidden").slice(0, 5).show();
+            if ($(".movie_grade_area:hidden").length == 0) {
+                $('#load').attr('style', "display:none;");
+            }
+        })
+    })
 </script>
 
 </body>

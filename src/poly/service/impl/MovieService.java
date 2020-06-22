@@ -82,7 +82,7 @@ public class MovieService implements IMovieService {
 
         }
 
-        String colNm = "MovieRank_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieRank_";
 
         movieMapper.createCollection(colNm);
 
@@ -97,7 +97,7 @@ public class MovieService implements IMovieService {
     public List<MovieDTO> getRank() throws Exception {
         log.info(this.getClass().getName() + ".getRank Start");
 
-        String colNm = "MovieRank_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieRank_";
 
         List<MovieDTO> rList = movieMapper.getRank(colNm);
 
@@ -117,7 +117,7 @@ public class MovieService implements IMovieService {
 
         int res = 0;
 
-        String colNm = "MovieRank_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieRank_";
 
         List<MovieDTO> rList = movieMapper.getRank(colNm);
 
@@ -207,7 +207,7 @@ public class MovieService implements IMovieService {
 
             dList.add(pDTO);
 
-            String colNm2 = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
+            String colNm2 = "MovieDetail_";
 
             movieMapper.createCollectionDetail(colNm2);
 
@@ -224,7 +224,7 @@ public class MovieService implements IMovieService {
     public List<MovieDetailDTO> getMovieDetail() throws Exception {
         log.info(this.getClass().getName() + ".getMovieDetail Start");
 
-        String colNm = "MovieDetail_" + DateUtil.getDateTime("yyyyMMdd");
+        String colNm = "MovieDetail_";
 
         List<MovieDetailDTO> rList = movieMapper.getMovieDetail(colNm);
 
