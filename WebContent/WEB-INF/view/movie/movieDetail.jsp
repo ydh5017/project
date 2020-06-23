@@ -8,6 +8,7 @@
     List<MovieDetailDTO> mList = (List<MovieDetailDTO>)request.getAttribute("mList");
     List<ReviewDTO> rList = (List<ReviewDTO>)request.getAttribute("rList");
     List<MyMovieDTO> yList = (List<MyMovieDTO>)request.getAttribute("yList");
+    String average = (String)request.getAttribute("average");
 
     String user_seq = (String)session.getAttribute("SS_userSeq");
     if (user_seq == null) {
@@ -46,6 +47,40 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <style>
+        .starR1 {
+            background:
+                    url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+                    no-repeat -52px 0;
+            background-size: auto 100%;
+            width: 15px;
+            height: 30px;
+            float: left;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+
+        .starR2 {
+            background:
+                    url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+                    no-repeat right 0;
+            background-size: auto 100%;
+            width: 15px;
+            height: 30px;
+            float: left;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+
+        .starR1.on {
+            background-position: 0 0;
+        }
+
+        .starR2.on {
+            background-position: -15px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -124,21 +159,36 @@
                                     <div class="ag_top">
                                         <span class="agt_tit">나의 평점</span>
                                         <div class="star_area big eve_star_parent" id="myGradeA">
-                                            <span class="ic_star big eve_star"><span class="bg_star"></span></span>
-                                            <span class="ic_star big eve_star"><span class="bg_star"></span></span>
-                                            <span class="ic_star big eve_star"><span class="bg_star"></span></span>
-                                            <span class="ic_star big eve_star"><span class="bg_star"></span></span>
-                                            <span class="ic_star big eve_star"><span class="bg_star"></span></span>
-                                            <span class="star_num" id="myGradeStarNum">0</span>
+                                            <div class="starRev">
+                                            <span class="starR1" id="s05">별1_왼쪽</span>
+                                            <span class="starR2" id="s10">별1_오른쪽</span>
+                                            <span class="starR1" id="s15">별2_왼쪽</span>
+                                            <span class="starR2" id="s20">별2_오른쪽</span>
+                                            <span class="starR1" id="s25">별3_왼쪽</span>
+                                            <span class="starR2" id="s30">별3_오른쪽</span>
+                                            <span class="starR1" id="s35">별4_왼쪽</span>
+                                            <span class="starR2" id="s40">별4_오른쪽</span>
+                                            <span class="starR1" id="s45">별5_왼쪽</span>
+                                            <span class="starR2" id="s50">별5_오른쪽</span>
+                                            <input type="text" class="star_num" id="SP" value="0" readonly style="border: none" onfocus='this.blur();'>
+                                                <input type="hidden" id="point" name="point" value="0">
+                                            </div>
                                         </div>
                                         <span class="agt_tit">종합 평점</span>
-                                        <div class="star_area" id="totalGradeA"><span class="ic_star all_star"><span
-                                                class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                class="bg_star"></span></span><span class="ic_star"><span
-                                                class="bg_star"></span></span><span class="star_num" id="star_num">8.1</span></div>
-                                    </div>
+                                        <div class="star_area" id="totalGradeA">
+                                        <% float Average = Float.parseFloat(average); %>
+                                            <span class="starR1 <% if (Average > 0) { %> on <% } %>">별1_왼쪽</span>
+                                            <span class="starR2 <% if (Average >= 2) { %> on <% } %>">별1_오른쪽</span>
+                                            <span class="starR1 <% if (Average >= 3) { %> on <% } %>">별2_왼쪽</span>
+                                            <span class="starR2 <% if (Average >= 4) { %> on <% } %>">별2_오른쪽</span>
+                                            <span class="starR1 <% if (Average >= 5) { %> on <% } %>">별3_왼쪽</span>
+                                            <span class="starR2 <% if (Average >= 6) { %> on <% } %>">별3_오른쪽</span>
+                                            <span class="starR1 <% if (Average >= 7) { %> on <% } %>">별4_왼쪽</span>
+                                            <span class="starR2 <% if (Average >= 8) { %> on <% } %>">별4_오른쪽</span>
+                                            <span class="starR1 <% if (Average >= 9) { %> on <% } %>">별5_왼쪽</span>
+                                            <span class="starR2 <% if (Average >= 10) { %> on <% } %>">별5_오른쪽</span>
+                                            <span class="star_num" id="star_num"><%=average%></span></div>
+                                        </div>
                                     <div class="ag_cont">
                                         <textarea name="gradeTxt" id="gradeTxt" placeholder="별점을 먼저 선택하신 후, 감상을 남겨주세요.
 욕설, 비속어, 타인을 비방하는 문구를 사용하시면 운영자가 임의로 삭제할 수 있습니다.
@@ -177,21 +227,42 @@
                                     </div>
                                 </div>
                             </div>
-                            <% for (int i = 0; i < rList.size(); i++) { %>
+                            <% for (int i = 0; i < rList.size(); i++) { String POINT = rList.get(i).getReview_point(); float point = Float.parseFloat(POINT); %>
                             <div class="movie_grade_area" id="movie_grade_area" style="display: none">
                                 <div class="all_grade_cont white_box" id="all_grade_cont_white_box">
                                     <div class="ag_cont_box">
+                                        <form action="/reviewMod.do" id="rm<%=i%>" method="post">
                                         <div class="ag_top">
-                                            <div class="star_area" id="star_area1"><span class="ic_star all_star"><span
-                                                    class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                    class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                    class="bg_star"></span></span><span class="ic_star all_star"><span
-                                                    class="bg_star"></span></span><span class="ic_star half_star"><span
-                                                    class="bg_star"></span></span><span class="star_num" id="star_num">9</span></div>
+                                            <div class="star_area" id="star_area1<%=i%>" style="display: block">
+                                                <span class="starR1 on">별1_왼쪽</span>
+                                                <span class="starR2 <% if (point >= 2) { %> on <% } %>">별1_오른쪽</span>
+                                                <span class="starR1 <% if (point >= 3) { %> on <% } %>">별2_왼쪽</span>
+                                                <span class="starR2 <% if (point >= 4) { %> on <% } %>">별2_오른쪽</span>
+                                                <span class="starR1 <% if (point >= 5) { %> on <% } %>">별3_왼쪽</span>
+                                                <span class="starR2 <% if (point >= 6) { %> on <% } %>">별3_오른쪽</span>
+                                                <span class="starR1 <% if (point >= 7) { %> on <% } %>">별4_왼쪽</span>
+                                                <span class="starR2 <% if (point >= 8) { %> on <% } %>">별4_오른쪽</span>
+                                                <span class="starR1 <% if (point >= 9) { %> on <% } %>">별5_왼쪽</span>
+                                                <span class="starR2 <% if (point >= 10) { %> on <% } %>">별5_오른쪽</span>
+                                                <span class="star_num"><%=rList.get(i).getReview_point()%></span>
+                                            </div>
+                                            <div class="starRev" id="star_mod<%=i%>" style="display: none">
+                                                <span class="starR1" id="s1">별1_왼쪽</span>
+                                                <span class="starR2" id="s2">별1_오른쪽</span>
+                                                <span class="starR1" id="s3">별2_왼쪽</span>
+                                                <span class="starR2" id="s4">별2_오른쪽</span>
+                                                <span class="starR1" id="s5">별3_왼쪽</span>
+                                                <span class="starR2" id="s6">별3_오른쪽</span>
+                                                <span class="starR1" id="s7">별4_왼쪽</span>
+                                                <span class="starR2" id="s8">별4_오른쪽</span>
+                                                <span class="starR1" id="s9">별5_왼쪽</span>
+                                                <span class="starR2" id="s010">별5_오른쪽</span>
+                                                <input type="text" class="star_num" id="MSP" value="0" readonly style="border: none" onfocus='this.blur();'>
+                                                <input type="hidden" id="Mpoint" name="Mpoint" value="0">
+                                            </div>
                                         </div>
                                         <div class="ag_cont" id="gradeList">
                                             <p class="ag_text" id="gradeListComment<%=i%>" style="display:block;"><%=rList.get(i).getContent()%></p>
-                                            <form action="/reviewMod.do" id="rm<%=i%>" method="post">
                                             <textarea id="Rc<%=i%>" name="RMcontent" style="display: none" placeholder="<%=rList.get(i).getContent()%>"></textarea>
                                             <p class="ag_writer"><span class="writer"><%=rList.get(i).getReg_id()%></span><span class="date"><%=rList.get(i).getReg_dt()%></span>
                                                 <% if (rList.get(i).getChg_dt() != null) { %>
@@ -217,7 +288,6 @@
                                                     <input type="hidden" name="Rno" value="<%=rList.get(i).getReview_seq()%>">
                                                     <a style="float: right" onclick="return rDel(<%=i%>)">삭제</a>
                                                     <input type="hidden" name="mid" value="<%=mList.get(0).getMid()%>">
-                                                </form>
                                                 &nbsp;
                                                 <p style="float: right">/</p>
                                                 &nbsp;
@@ -225,6 +295,7 @@
                                             </div>
                                             <% } %>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +338,11 @@
 <script type="text/javascript">
     function buhs() {
         var content = document.getElementById("gradeTxt");
-
+        var point=$('#point').val();
+        if (point == "0") {
+            alert("평점을 정해 주세요.");
+            return false;
+        }
         if (content.value == "") {
             alert("내용을 입력해 주세요.");
             $('#gradeTxt').focus();
@@ -295,15 +370,25 @@
         $('#Rc'+i).attr('style','display:block;');
         $('#RD'+i).attr('style','display:none;');
         $('#RS'+i).attr('style','display:block;');
+        $('#star_area1'+i).attr('style','display:none;');
+        $('#star_mod'+i).attr('style','display:block;');
     };
     function rModC(i) {
         $('#gradeListComment'+i).attr('style','display:block;');
         $('#Rc'+i).attr('style','display:none;');
         $('#RD'+i).attr('style','display:block;');
         $('#RS'+i).attr('style','display:none;');
+        $('#star_area1'+i).attr('style','display:block;');
+        $('#star_mod'+i).attr('style','display:none;');
     };
     function RMOD(i) {
         var content = document.getElementById("Rc"+i);
+        var point=$('#Mpoint').val();
+
+        if (point == "0") {
+            alert("평점을 정해 주세요.");
+            return false;
+        }
         if (content.value == ""){
             alert("내용을 입력해주세요.")
             content.focus();
@@ -314,6 +399,9 @@
 
     $(function () {
         $(".movie_grade_area").slice(0, 5).show();
+        if ($(".movie_grade_area:hidden").length == 0) {
+            $('#load').attr('style', "display:none;");
+        }
         $("#load").click(function (e) {
             e.preventDefault();
             $(".movie_grade_area:hidden").slice(0, 5).show();
@@ -323,6 +411,96 @@
         })
     })
 </script>
+<script>
+    $('.starRev span').click(function(){
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+        return false;
+    });
+    $('#s05').click(function() {
+        $('#SP').attr('value', '1');
+        $('#point').attr('value', '1');
+    });
+    $('#s10').click(function() {
+        $('#SP').attr('value', '2');
+        $('#point').attr('value', '2');
+    });
+    $('#s15').click(function() {
+        $('#SP').attr('value', '3');
+        $('#point').attr('value', '3');
+    });
+    $('#s20').click(function() {
+        $('#SP').attr('value', '4');
+        $('#point').attr('value', '4');
+    });
+    $('#s25').click(function() {
+        $('#SP').attr('value', '5');
+        $('#point').attr('value', '5');
+    });
+    $('#s30').click(function() {
+        $('#SP').attr('value', '6');
+        $('#point').attr('value', '6');
+    });
+    $('#s35').click(function() {
+        $('#SP').attr('value', '7');
+        $('#point').attr('value', '7');
+    });
+    $('#s40').click(function() {
+        $('#SP').attr('value', '8');
+        $('#point').attr('value', '8');
+    });
+    $('#s45').click(function() {
+        $('#SP').attr('value', '9');
+        $('#point').attr('value', '9');
+    });
+    $('#s50').click(function() {
+        $('#SP').attr('value', '10');
+        $('#point').attr('value', '10');
+    });
+</script>
+<script>
+    $('#s1').click(function() {
+        $('#MSP').attr('value', '1');
+        $('#Mpoint').attr('value', '1');
+    });
+    $('#s2').click(function() {
+        $('#MSP').attr('value', '2');
+        $('#Mpoint').attr('value', '2');
+    });
+    $('#s3').click(function() {
+        $('#MSP').attr('value', '3');
+        $('#Mpoint').attr('value', '3');
+    });
+    $('#s4').click(function() {
+        $('#MSP').attr('value', '4');
+        $('#Mpoint').attr('value', '4');
+    });
+    $('#s5').click(function() {
+        $('#MSP').attr('value', '5');
+        $('#Mpoint').attr('value', '5');
+    });
+    $('#s6').click(function() {
+        $('#MSP').attr('value', '6');
+        $('#Mpoint').attr('value', '6');
+    });
+    $('#s7').click(function() {
+        $('#MSP').attr('value', '7');
+        $('#Mpoint').attr('value', '7');
+    });
+    $('#s8').click(function() {
+        $('#MSP').attr('value', '8');
+        $('#Mpoint').attr('value', '8');
+    });
+    $('#s9').click(function() {
+        $('#MSP').attr('value', '9');
+        $('#Mpoint').attr('value', '9');
+    });
+    $('#s010').click(function() {
+        $('#MSP').attr('value', '10');
+        $('#Mpoint').attr('value', '10');
+    });
+</script>
+
 
 </body>
 

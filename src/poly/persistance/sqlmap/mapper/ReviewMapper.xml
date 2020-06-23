@@ -9,6 +9,7 @@
 		MOVIE_ID,
 		USER_SEQ,
 		CONTENT,
+		REVIEW_POINT,
 		REG_ID,
 		REG_DT
 	)
@@ -17,6 +18,7 @@
 		#{movie_id},
 		#{user_seq},
 		#{content},
+		#{review_point},
 		#{reg_id},
 		SYSDATE()
 	)
@@ -29,6 +31,7 @@
 		USER_SEQ AS user_seq,
 		MOVIE_ID AS movie_id,
 		CONTENT AS content,
+		REVIEW_POINT AS review_point,
 		REG_DT AS reg_dt,
 		REG_ID AS reg_id,
 		CHG_DT AS chg_dt
@@ -54,6 +57,7 @@
 		REVIEW
 	SET
 			CONTENT = #{content},
+			REVIEW_POINT = #{review_point},
 			CHG_DT = SYSDATE()
 	WHERE
 		REVIEW_SEQ =#{review_seq}

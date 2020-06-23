@@ -3615,7 +3615,7 @@ a:-webkit-any-link {
 }
 .my_grade_cont.eidit_box .ag_top .star_area {
   margin-right: 30px;
-  padding-top: 24px;
+  padding-top: 18px;
 }
 .ag_cont_box .star_area {
   margin-right: 40px;
@@ -3854,3 +3854,4 @@ textarea {
   background: #ec6159;
   cursor: pointer;
 }
+

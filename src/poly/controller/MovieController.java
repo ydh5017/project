@@ -136,9 +136,29 @@ public class MovieController {
             e.printStackTrace();
         }
 
+        float sum = 0;
+        float average2 = 0;
+
+        for (int i = 0; i < rList.size(); i++) {
+            String POINT = rList.get(i).getReview_point();
+            float point = Float.parseFloat(POINT);
+
+            sum = sum + point;
+        }
+
+        if (rList.size() == 0){
+            average2 = 0;
+        } else {
+            average2 = sum / rList.size();
+        }
+
+        String average = String.format("%.1f", average2);
+
         log.info("rList : " + rList.size());
+        log.info("average : " + average);
 
         model.addAttribute("rList", rList);
+        model.addAttribute("average", average);
 
         HashMap<String, String> yMap = new HashMap<>();
         yMap.put("mid", mid);

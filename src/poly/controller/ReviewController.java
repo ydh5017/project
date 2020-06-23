@@ -25,16 +25,19 @@ public class ReviewController {
         String user_seq = (String) session.getAttribute("SS_userSeq");
         String mid = request.getParameter("mid");
         String content = request.getParameter("gradeTxt");
+        String point = request.getParameter("point");
 
         log.info("mid : " + mid);
         log.info("reg_id : " + reg_id);
         log.info("user_seq : " + user_seq);
         log.info("content : " + content);
+        log.info("point : " + point);
 
         ReviewDTO rDTO = new ReviewDTO();
 
         rDTO.setMovie_id(mid);
         rDTO.setContent(content);
+        rDTO.setReview_point(point);
         rDTO.setReg_id(reg_id);
         rDTO.setUser_seq(user_seq);
 
@@ -92,8 +95,11 @@ public class ReviewController {
 
         String content = request.getParameter("RMcontent");
         String review_seq = request.getParameter("review_seq");
+        String point = request.getParameter("Mpoint");
+
         rDTO.setReview_seq(review_seq);
         rDTO.setContent(content);
+        rDTO.setReview_point(point);
 
         int res = 0;
 
@@ -102,6 +108,7 @@ public class ReviewController {
         log.info("mid : " + mid);
         log.info("review_seq : " +review_seq);
         log.info("content : " + content);
+        log.info("point : " + point);
 
         String msg, url;
 

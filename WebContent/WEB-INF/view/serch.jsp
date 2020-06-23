@@ -163,6 +163,9 @@
 
     $(function () {
         $(".tbl_type").slice(0, 5).show();
+        if ($(".tbl_type:hidden").length == 0) {
+            $('#load').attr('style', "display:none;");
+        }
         $("#load").click(function (e) {
             e.preventDefault();
             $(".tbl_type:hidden").slice(0, 5).show();

@@ -10,6 +10,7 @@ public class ReviewDTO {
     private String reg_id;
     private String chg_dt;
     private String chg_id;
+    private String review_point;
 
     public String getReview_seq() {
         return review_seq;
@@ -73,5 +74,13 @@ public class ReviewDTO {
 
     public void setChg_id(String chg_id) {
         this.chg_id = chg_id;
+    }
+
+    public String getReview_point() {
+        return review_point;
+    }
+
+    public void setReview_point(String review_point) {
+        this.review_point = review_point;
     }
 }
