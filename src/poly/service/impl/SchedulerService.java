@@ -19,6 +19,8 @@ public class SchedulerService implements ISchedulerService {
     private IMovieService movieService;
 
     @Scheduled(cron = "0 0 0/12 * * ?")
+
+    // a
     @Override
     public void sTest() throws Exception {
 
