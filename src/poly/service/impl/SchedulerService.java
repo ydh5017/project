@@ -18,7 +18,7 @@ public class SchedulerService implements ISchedulerService {
     @Resource(name = "MovieService")
     private IMovieService movieService;
 
-    @Scheduled(cron = "0 0 0/12 * * ?")
+    @Scheduled(cron = "0 0 0/6 * * ?")
 
     // a
     @Override
