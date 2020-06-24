@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Pricing - Company Bootstrap Template</title>
+    <title>이메일 찾기</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 

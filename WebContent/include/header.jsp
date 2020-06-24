@@ -53,7 +53,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo mr-auto"><a href="/index.do"><span>Com</span>pany</a></h1>
+        <h1 class="logo mr-auto"><a href="/index.do"><span>Movie</span>Moa</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -64,6 +64,9 @@
                 <% if (userEmail != null) { %>
                 <li><a href="/mymovie.do">나의 영화</a></li>
                 <li><a href="/userDetail.do">마이페이지</a></li>
+                <% } %>
+                <% if (userAss.equals("1")) {%>
+                <li><a href="/UserList.do?Pno=1">회원관리</a></li>
                 <% } %>
 
             </ul>

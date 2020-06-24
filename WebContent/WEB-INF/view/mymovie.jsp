@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Portfolio - Company Bootstrap Template</title>
+    <title>나의 영화</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -76,7 +76,7 @@
                 <div class="head_top_title">
                     등록된 나의 영화가 없습니다.
                 </div>
-                <% } %>
+                <% } else { %>
                 <% for (int i = 0; i < mList.size(); i++) {%>
                 <div class="tbl_type" style="display: none">
                     <div class="tbl_col">
@@ -131,6 +131,7 @@
             <div class="btn_bottom_area mt60" id="btnListMore">
                 <button type="button" id="load" class="btn_defaultB ">더보기</button>
             </div>
+            <% } %>
         </div>
     </div>
 

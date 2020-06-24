@@ -12,7 +12,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-	<title>Company Bootstrap Template - Index</title>
+	<title>MOVIEMOA</title>
 	<meta content="" name="descriptison">
 	<meta content="" name="keywords">
 
@@ -59,7 +59,7 @@
 		<div class="carousel-inner" role="listbox">
 
 			<!-- Slide 1 -->
-			<div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg)">
+			<div class="carousel-item active" style="background-image: url(/assets/img/slide/slide_1.jpg)">
 				<div class="carousel-container">
 					<% if (rList.size() > 0) {for (int i = 0; i < 5; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
@@ -83,7 +83,7 @@
 			</div>
 
 			<!-- Slide 2 -->
-			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-2.jpg);">
+			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide_2.jpg);">
 				<div class="carousel-container">
 					<% if (rList.size() > 0) { for (int i = 5; i < 10; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
@@ -107,7 +107,7 @@
 			</div>
 
 			<!-- Slide 3 -->
-			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide-3.jpg);">
+			<div class="carousel-item" style="background-image: url(/assets/img/slide/slide_3.jpg);">
 				<div class="carousel-container">
 					<% if (rList.size() > 0) { for (int i = 10; i < 15; i++) {%>
 					<div class="movie_info_card" onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">
@@ -156,7 +156,7 @@
 				<div class="head_top_title">
 					예매순위
 				</div>
-				<div class="movie_rank_cont" id="movieRank">
+				<div class="movie_rank_cont" id="movieRank" style="text-align: -webkit-center;">
 					<% for (int i = 0; i < rList.size(); i++) { %>
 						<div class="movie_info_card" style="display: none">
 							<div onclick="location.href='movieDetail.do?mid=<%=rList.get(i).getMid()%>'">

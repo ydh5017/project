@@ -2542,6 +2542,7 @@ nav ul, li {
 
 .movie_rank_cont {
   font-size: 0;
+  text-align: -webkit-center;
 }
 
 .movie_info_card {

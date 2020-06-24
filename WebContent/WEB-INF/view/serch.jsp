@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Services - Company Bootstrap Template</title>
+    <title>영화 검색</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 

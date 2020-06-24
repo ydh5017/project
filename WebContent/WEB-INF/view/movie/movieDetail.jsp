@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Contact - Company Bootstrap Template</title>
+    <title>영화 상세정보</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -262,8 +262,8 @@
                                             </div>
                                         </div>
                                         <div class="ag_cont" id="gradeList">
-                                            <p class="ag_text" id="gradeListComment<%=i%>" style="display:block;"><%=rList.get(i).getContent()%></p>
-                                            <textarea id="Rc<%=i%>" name="RMcontent" style="display: none" placeholder="<%=rList.get(i).getContent()%>"></textarea>
+                                            <p class="ag_text" id="gradeListComment<%=i%>" style="display:block;"><%=rList.get(i).getContent().replace("& gt;", "&gt;").replace("& lt;", "&lt;").replace("& #39;", "& #39;").replace("& #40;", "&#40;").replace("& #41;", "&#41;")%></p>
+                                            <textarea id="Rc<%=i%>" name="RMcontent" style="display: none" placeholder="<%=rList.get(i).getContent().replace("& gt;", "&gt;").replace("& lt;", "&lt;").replace("& #39;", "& #39;").replace("& #40;", "&#40;").replace("& #41;", "&#41;")%>"></textarea>
                                             <p class="ag_writer"><span class="writer"><%=rList.get(i).getReg_id()%></span><span class="date"><%=rList.get(i).getReg_dt()%></span>
                                                 <% if (rList.get(i).getChg_dt() != null) { %>
                                                 <span class="writer"></span>
