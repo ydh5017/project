@@ -4,7 +4,7 @@
     <!-- 나의 영화 추가 -->
     <insert id="mymovieAdd" parameterType="MyMovieDTO">
         INSERT
-        INTO MYMOVIE
+        INTO mymovie
         (
             USER_SEQ,
             MOVIE_ID,
@@ -36,7 +36,7 @@
         SELECT
             MYMOVIE_SEQ AS mymovie_seq
         FROM
-            MYMOVIE
+            mymovie
         WHERE
             MOVIE_ID = #{mid} AND USER_SEQ = #{user_seq}
     </select>
@@ -45,7 +45,7 @@
     <delete id="mymovieDel" parameterType="integer">
         DELETE
             FROM
-                MYMOVIE
+                mymovie
             WHERE
                 MYMOVIE_SEQ = #{mymovie_seq}
     </delete>
@@ -62,7 +62,7 @@
             ACTOR AS actor,
             IMAGE AS image
         FROM
-            MYMOVIE
+            mymovie
         WHERE
             USER_SEQ = #{user_seq}
         ORDER BY MYMOVIE_SEQ DESC
@@ -72,7 +72,7 @@
     <delete id="mymovieListDel" parameterType="integer">
         DELETE
             FROM
-                MYMOVIE
+                mymovie
             WHERE
                 MYMOVIE_SEQ = #{mymovie_seq}
     </delete>

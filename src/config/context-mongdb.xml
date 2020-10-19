@@ -10,7 +10,7 @@
           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 	<!-- Default bean name is 'mongo' -->
-	<mongo:mongo-client host="192.168.136.128"
+	<mongo:mongo-client host="192.168.136.130"
 		port="27017" credentials="MyUser:1234@MyDB" id="mongo">
 	</mongo:mongo-client>
 

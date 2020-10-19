@@ -69,8 +69,10 @@
         </div>
     </section><!-- End Breadcrumbs -->
 
+    <section id="clients" class="blog">
     <div class="search_container_area">
         <div class="search_cont lay_inner">
+            <section id="services" class="services section-bg">
             <div class="un_serch_block" id="movieList">
                 <% if (mList.size() == 0) {%>
                 <div class="head_top_title">
@@ -132,8 +134,10 @@
                 <button type="button" id="load" class="btn_defaultB ">더보기</button>
             </div>
             <% } %>
+    </section>
         </div>
     </div>
+    </section>
 
 </main><!-- End #main -->
 
@@ -169,9 +173,13 @@
         }else{
             alert("취소되었습니다.");
         }
-    };
+    }
+
     $(function () {
         $(".tbl_type").slice(0, 5).show();
+        if ($(".tbl_type:hidden").length == 0) {
+            $('#load').attr('style', "display:none;");
+        }
         $("#load").click(function (e) {
             e.preventDefault();
             $(".tbl_type:hidden").slice(0, 5).show();

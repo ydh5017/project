@@ -178,8 +178,8 @@
 						</div>
 					<% } %>
 				</div>
-				<div class="btn_bottom_area" id="dvTicketMore">
-					<button type="button" class="btn_defaultB" id="load">더보기</button>
+				<div class="btn_bottom_area" id="load">
+					<button type="button" class="btn_defaultB">더보기</button>
 				</div>
 			</div>
 		</div>

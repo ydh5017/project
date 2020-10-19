@@ -4,7 +4,7 @@
     <!-- 리뷰 추가 -->
     <insert id="reviewAdd" parameterType="ReviewDTO">
 	INSERT
-	INTO REVIEW
+	INTO review
 	(
 		MOVIE_ID,
 		USER_SEQ,
@@ -36,7 +36,7 @@
 		REG_ID AS reg_id,
 		CHG_DT AS chg_dt
 	FROM
-		REVIEW
+		review
 	WHERE
 		MOVIE_ID = #{mid}
 	ORDER BY REVIEW_SEQ DESC
@@ -46,7 +46,7 @@
 	<delete id="reviewDel" parameterType="integer">
 	DELETE
 		FROM
-			REVIEW
+			review
 		WHERE
 			REVIEW_SEQ = #{review_seq}
 	</delete>
@@ -54,7 +54,7 @@
 	<!-- 리뷰 수정 -->
 	<update id="reviewMod" parameterType="ReviewDTO">
 	UPDATE
-		REVIEW
+		review
 	SET
 			CONTENT = #{content},
 			REVIEW_POINT = #{review_point},

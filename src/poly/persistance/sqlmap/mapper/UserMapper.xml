@@ -5,7 +5,7 @@
     <insert id="userRegProc" parameterType="UserDTO">
 	INSERT
 	INTO
-	USER_INFO
+	user_info
 	(
 		USER_EMAIL,
 		USER_NAME,
@@ -29,7 +29,7 @@
     <select id="eCheck" parameterType="String" resultType="String">
 SELECT COUNT(*)
 FROM
-	USER_INFO
+	user_info
 WHERE
 	USER_EMAIL=#{userEmail}
 </select>
@@ -43,14 +43,14 @@ SELECT
 	CHG_DT AS userChg_dt,
 	CHG_ID AS userChg_id,
 	USER_ASS AS userAss
-FROM USER_INFO
+FROM user_info
 WHERE USER_EMAIL = #{userEmail} AND PASSWORD = #{userPassword}
 </select>
     <!-- 회원탈퇴 하기 -->
     <delete id="userDelete" parameterType="UserDTO">
 DELETE
 FROM
-	USER_INFO
+	user_info
 WHERE
 	USER_EMAIL=#{userEmail}
 </delete>
@@ -58,21 +58,21 @@ WHERE
     <select id="email1" parameterType="UserDTO" resultType="String">
 SELECT SUBSTR(USER_EMAIL,1,1)
 FROM
- USER_INFO
+ user_info
 WHERE
   USER_NAME = #{userName}
 </select>
     <select id="email2" parameterType="UserDTO" resultType="String">
 SELECT SUBSTR(USER_EMAIL,7)
 FROM
- USER_INFO
+ user_info
 WHERE
   USER_NAME = #{userName}
 </select>
     <!-- 비밀번호 변경 -->
     <update id="changeP" parameterType="UserDTO">
 UPDATE
-	USER_INFO
+	user_info
 SET
 	PASSWORD = #{userPassword}
 WHERE
@@ -82,14 +82,14 @@ WHERE
 SELECT
 	PASSWORD
 FROM
-	USER_INFO
+	user_info
 WHERE
 	USER_EMAIL = #{userEmail}
 </select>
     <!-- 회원정보 변경 -->
     <update id="userMod" parameterType="UserDTO">
 UPDATE
-	USER_INFO
+	user_info
 SET
 		USER_EMAIL = #{userEmail},
 		USER_NAME = #{userName},
