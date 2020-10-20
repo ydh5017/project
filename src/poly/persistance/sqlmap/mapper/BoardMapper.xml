@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.BoardMapper">
+    <!-- 게시글 추가 -->
+    <insert id="boardAddproc" parameterType="BoardDTO">
+	INSERT
+	INTO
+	BOARD
+	(
+		USER_SEQ,
+		BOARD_NOTICE,
+		BOARD_TITLE,
+		BOARD_CONTENT,
+		BOARD_COUNT,
+		REG_ID,
+		REG_DT
+	)
+	VALUES
+	(
+		#{user_seq},
+		#{board_notice},
+		#{board_title},
+		#{board_content},
+		0,
+		#{reg_id},
+		SYSDATE()
+	)
+
+</insert>
+    <!-- 게시글 확인 -->
+    <select id="getBoardList" resultType="BoardDTO" parameterType="map">
+	SELECT
+		BOARD_SEQ AS board_seq,
+		BOARD_NOTICE AS board_notice,
+		BOARD_TITLE AS board_title,
+		BOARD_CONTENT AS board_content,
+		BOARD_COUNT AS board_count,
+		REG_ID AS reg_id,
+		REG_DT AS reg_dt
+	FROM
+		BOARD
+	ORDER BY BOARD_SEQ DESC
+	LIMIT #{startlist}, #{listsize}
+</select>
+    <!-- 게시글 상세 -->
+    <select id="boardDetail" resultType="BoardDTO">
+	SELECT
+		BOARD_SEQ AS board_seq,
+		BOARD_NOTICE AS board_notice,
+		BOARD_TITLE AS board_title,
+		BOARD_CONTENT AS board_content,
+		BOARD_COUNT AS board_count,
+		REG_ID AS reg_id,
+		REG_DT AS reg_dt,
+		CHG_DT AS chg_dt
+	FROM
+		BOARD
+	WHERE
+		BOARD_SEQ=#{board_seq}
+</select>
+    <!-- 게시글 삭제 -->
+    <delete id="boardDelete" parameterType="BoardDTO">
+	DELETE
+	FROM
+		BOARD
+	WHERE
+		BOARD_SEQ =#{board_seq}
+</delete>
+    <!-- 게시글 수정 -->
+    <update id="boardMod" parameterType="BoardDTO">
+UPDATE
+	BOARD
+SET
+		BOARD_NOTICE=#{board_notice},
+		BOARD_TITLE=#{board_title},
+		BOARD_CONTENT=#{board_content},
+		CHG_DT=SYSDATE(),
+		CHG_ID=#{chg_id}
+
+WHERE
+	BOARD_SEQ = #{board_seq}
+</update>
+    <!-- 조회수 -->
+    <update id="count" parameterType="BoardDTO">
+UPDATE
+	BOARD
+SET
+		BOARD_COUNT=#{board_count}
+WHERE
+	BOARD_SEQ = #{board_seq}
+</update>
+    <!-- 게시글 총 수 -->
+    <select id="TotalCount" resultType="integer">
+	SELECT COUNT(0)
+	FROM
+		BOARD
+</select>
+</mapper>
