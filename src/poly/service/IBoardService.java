@@ -9,7 +9,7 @@ public interface IBoardService {
 
     int boardAddproc(BoardDTO bDTO)throws Exception;
 
-    List<BoardDTO> getBoardList(HashMap<String, Integer> hMap)throws Exception;
+    List<BoardDTO> getBoardList(HashMap<String, Integer> hMap) throws Exception;
 
     BoardDTO boardDetail(BoardDTO bDTO)throws Exception;
 

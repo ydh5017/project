@@ -68,6 +68,7 @@
                 <% if (userAss.equals("1")) {%>
                 <li><a href="/UserList.do?Pno=1">회원관리</a></li>
                 <% } %>
+                <li><a href="/board.do?Pno=1">평점/리뷰게시판</a></li>
 
             </ul>
         </nav><!-- .nav-menu -->

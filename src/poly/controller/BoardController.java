@@ -27,7 +27,9 @@ public class BoardController {
     public String board(HttpServletRequest request, Model model)throws Exception{
         // 페이징
         int page = Integer.parseInt(request.getParameter("Pno"));
+        log.info("Pno : " + page);
         int listCnt = boardservice.TotalCount(); // 총 게시글 개수
+        log.info("listCnt : " + listCnt);
 
         PagingDTO paging = new PagingDTO();
 
@@ -37,6 +39,7 @@ public class BoardController {
         int j = paging.getListSize();
         hMap.put("startlist", i);
         hMap.put("listsize", j);
+        log.info("hMap : " + hMap);
 
         List<BoardDTO> bList = new ArrayList<>();
         try {
@@ -72,6 +75,7 @@ public class BoardController {
         log.info(board_content);
         log.info(board_title);
         log.info(reg_id);
+        log.info(user_seq);
 
         BoardDTO bDTO =new BoardDTO();
         bDTO.setBoard_title(board_title.replace("script",""));
