@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>글쓰기</title>
+    <title>게시글 수정</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -111,53 +111,54 @@
             <div class="search_cont lay_inner">
                 <section id="services" class="services section-bg">
                     <div style="width: 100%; padding-top: 1%; text-align:center; margin:0 auto">
-                    <form onsubmit="return buhs();" action="boardAddproc.do" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-control" style="width: 75%;margin:0 auto;max-width: 1000px;" placeholder="제목을 입력해주세요.(최대 50자)" id="title" name="board_title">
-                        </div>
-                        <div class="form-group">
-                            <select class="custom-select col-lg-3"style="width: 75%;max-width: 1000px;"id="notice"name="board_notice">
-                                <option selected disabled>영화 선택</option>
-                                <%
-                                    for (int i = 0; i < rList.size(); i++) {
-                                %>
-                                <option value="<%=rList.get(i).getTitle()%>"><%=rList.get(i).getTitle()%></option>
-                                <%
-                                    }
-                                %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div class="ag_cont_box">
-                            <div class="ag_top">
-                                <span class="agt_tit">나의 평점</span>
-                                <div class="star_area big eve_star_parent" id="myGradeA">
-                                    <div class="starRev">
-                                        <span class="starR1" id="s05">별1_왼쪽</span>
-                                        <span class="starR2" id="s10">별1_오른쪽</span>
-                                        <span class="starR1" id="s15">별2_왼쪽</span>
-                                        <span class="starR2" id="s20">별2_오른쪽</span>
-                                        <span class="starR1" id="s25">별3_왼쪽</span>
-                                        <span class="starR2" id="s30">별3_오른쪽</span>
-                                        <span class="starR1" id="s35">별4_왼쪽</span>
-                                        <span class="starR2" id="s40">별4_오른쪽</span>
-                                        <span class="starR1" id="s45">별5_왼쪽</span>
-                                        <span class="starR2" id="s50">별5_오른쪽</span>
-                                        <input type="text" class="star_num" id="SP" value="0" readonly style="border: none" onfocus='this.blur();'>
-                                        <input type="hidden" id="point" name="point" value="0">
+                        <form onsubmit="return buhs();" action="/boardModproc.do" method="POST">
+                            <input type="hidden" name="board_seq" value="<%=Seq%>">
+                            <div class="form-group">
+                                <input type="text" class="form-control" style="width: 75%;margin:0 auto;max-width: 1000px;" placeholder="제목을 입력해주세요.(최대 50자)" id="title" name="board_title">
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select col-lg-3"style="width: 75%;max-width: 1000px;"id="notice"name="board_notice">
+                                    <option selected disabled>영화 선택</option>
+                                    <%
+                                        for (int i = 0; i < rList.size(); i++) {
+                                    %>
+                                    <option value="<%=rList.get(i).getTitle()%>"><%=rList.get(i).getTitle()%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="ag_cont_box">
+                                    <div class="ag_top">
+                                        <span class="agt_tit">나의 평점</span>
+                                        <div class="star_area big eve_star_parent" id="myGradeA">
+                                            <div class="starRev">
+                                                <span class="starR1" id="s05">별1_왼쪽</span>
+                                                <span class="starR2" id="s10">별1_오른쪽</span>
+                                                <span class="starR1" id="s15">별2_왼쪽</span>
+                                                <span class="starR2" id="s20">별2_오른쪽</span>
+                                                <span class="starR1" id="s25">별3_왼쪽</span>
+                                                <span class="starR2" id="s30">별3_오른쪽</span>
+                                                <span class="starR1" id="s35">별4_왼쪽</span>
+                                                <span class="starR2" id="s40">별4_오른쪽</span>
+                                                <span class="starR1" id="s45">별5_왼쪽</span>
+                                                <span class="starR2" id="s50">별5_오른쪽</span>
+                                                <input type="text" class="star_num" id="SP" value="0" readonly style="border: none" onfocus='this.blur();'>
+                                                <input type="hidden" id="point" name="point" value="0">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin:0 auto;text-align:justify;width: 75%;max-width: 1000px;">
+                                <textarea id="summernote" name="board_content"></textarea>
                             </div>
-                        </div>
-                        <div style="margin:0 auto;text-align:justify;width: 75%;max-width: 1000px;">
-                            <textarea id="summernote" name="board_content"></textarea>
-                        </div>
-                        <div>
-                            <button type="button" class="btn" style="background-color:rgba(235,70,70,0.7); color:white; margin-top: 2%;margin-right:2%;margin-bottom:2%;" onclick="history.back()">뒤로가기</button>
-                            <input type="submit" class="btn" style="background-color:rgb(129, 114, 242);margin-top:2%;margin-left:2%;margin-bottom:2%;; color:white;" value="작성하기">
-                        </div>
-                    </form>
+                            <div>
+                                <button type="button" class="btn" style="background-color:rgba(235,70,70,0.7); color:white; margin-top: 2%;margin-right:2%;margin-bottom:2%;" onclick="history.back()">뒤로가기</button>
+                                <input type="submit" class="btn" style="background-color:rgb(129, 114, 242);margin-top:2%;margin-left:2%;margin-bottom:2%;; color:white;" value="작성하기">
+                            </div>
+                        </form>
                     </div>
                 </section>
             </div>

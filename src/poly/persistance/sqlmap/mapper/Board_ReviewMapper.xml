@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.Board_ReviewMapper">
+    <!-- 리뷰 추가 -->
+    <insert id="reviewAdd" parameterType="Board_ReviewDTO">
+	INSERT
+	INTO board_review
+	(
+		BOARD_SEQ,
+		USER_SEQ,
+		CONTENT,
+		REG_ID,
+		REG_DT
+	)
+	VALUES
+	(
+		#{board_seq},
+		#{user_seq},
+		#{content},
+		#{reg_id},
+		SYSDATE()
+	)
+</insert>
+
+    <!-- 리뷰 확인 -->
+    <select id="getReviewList" resultType="Board_ReviewDTO" parameterType="map">
+	SELECT
+		REVIEW_SEQ AS review_seq,
+		USER_SEQ AS user_seq,
+		BOARD_SEQ AS board_seq,
+		CONTENT AS content,
+		REG_DT AS reg_dt,
+		REG_ID AS reg_id,
+		CHG_DT AS chg_dt
+	FROM
+		board_review
+	WHERE
+		BOARD_SEQ = #{board_seq}
+	ORDER BY REVIEW_SEQ DESC
+	</select>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="reviewDel" parameterType="integer">
+	DELETE
+		FROM
+			board_review
+		WHERE
+			REVIEW_SEQ = #{review_seq}
+	</delete>
+
+    <!-- 리뷰 수정 -->
+    <update id="reviewMod" parameterType="Board_ReviewDTO">
+	UPDATE
+		board_review
+	SET
+			CONTENT = #{content},
+			CHG_DT = SYSDATE()
+	WHERE
+		REVIEW_SEQ =#{review_seq}
+</update>
+</mapper>

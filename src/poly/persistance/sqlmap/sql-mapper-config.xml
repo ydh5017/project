@@ -8,6 +8,7 @@
         <typeAlias type="poly.dto.ReviewDTO" alias="ReviewDTO"/>
         <typeAlias type="poly.dto.MyMovieDTO" alias="MyMovieDTO"/>
         <typeAlias type="poly.dto.PagingDTO" alias="PagingDTO"/>
-        <typeAlias type="poly.dto.PagingDTO" alias="BoardDTO"/>
+        <typeAlias type="poly.dto.BoardDTO" alias="BoardDTO"/>
+        <typeAlias type="poly.dto.Board_ReviewDTO" alias="Board_ReviewDTO"/>
     </typeAliases>
 </configuration>

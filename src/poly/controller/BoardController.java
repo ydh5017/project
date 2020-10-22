@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import poly.dto.BoardDTO;
+import poly.dto.Board_ReviewDTO;
+import poly.dto.MovieDTO;
 import poly.dto.PagingDTO;
 import poly.service.IBoardService;
+import poly.service.IBoard_ReviewService;
+import poly.service.IMovieService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +26,13 @@ public class BoardController {
 
     @Resource(name="BoardService")
     private IBoardService boardservice;
+
+    @Resource(name = "MovieService")
+    private IMovieService movieService;
+
+    @Resource(name = "Board_ReviewService")
+    private IBoard_ReviewService board_reviewService;
+
     //게시판
     @RequestMapping(value="/board")
     public String board(HttpServletRequest request, Model model)throws Exception{
@@ -44,7 +55,7 @@ public class BoardController {
         List<BoardDTO> bList = new ArrayList<>();
         try {
             bList = boardservice.getBoardList(hMap);
-            log.info(bList);
+            log.info("bList : " + bList);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +71,11 @@ public class BoardController {
         String board_seq=(String)request.getParameter("board_seq");
         if(board_seq==null)
             board_seq="0";
-        log.info(board_seq);
+        log.info("board_seq : " + board_seq);
+
+        List<MovieDTO> rList = movieService.getRank();
+
+        model.addAttribute("rList", rList);
         model.addAttribute(board_seq);
         return "/board/boardAdd";
     }
@@ -71,11 +86,13 @@ public class BoardController {
         String board_notice=request.getParameter("board_notice");
         String reg_id=(String)session.getAttribute("SS_userEmail");
         String user_seq=(String)session.getAttribute("SS_userSeq");
-        log.info(board_notice);
-        log.info(board_content);
-        log.info(board_title);
-        log.info(reg_id);
-        log.info(user_seq);
+        String point=request.getParameter("point");
+        log.info("board_notice : " + board_notice);
+        log.info("board_content : " + board_content);
+        log.info("board_title : " + board_title);
+        log.info("reg_id : " + reg_id);
+        log.info("user_seq : " + user_seq);
+        log.info("point : " + point);
 
         BoardDTO bDTO =new BoardDTO();
         bDTO.setBoard_title(board_title.replace("script",""));
@@ -83,6 +100,7 @@ public class BoardController {
         bDTO.setBoard_notice(board_notice);
         bDTO.setReg_id(reg_id);
         bDTO.setUser_seq(user_seq);
+        bDTO.setPoint(point);
         int result = 0;
 
         String msg, url;
@@ -105,18 +123,25 @@ public class BoardController {
     public String boardDetail(HttpServletRequest request,Model model,HttpSession session)throws Exception{
         String board_seq=request.getParameter("no");
         log.info(board_seq);
+
         BoardDTO bDTO =new BoardDTO();
         bDTO.setBoard_seq(board_seq);
         bDTO = boardservice.boardDetail(bDTO);
+        log.info("bDTO : " + bDTO);
+
         int count=Integer.parseInt(bDTO.getBoard_count());
         count++;
         bDTO.setBoard_count(Integer.toString(count));
+
         int result=boardservice.count(bDTO);
         log.info(result);
         log.info(bDTO.getBoard_content());
         log.info(bDTO.getBoard_title());
         log.info(bDTO.getBoard_count());
         log.info(bDTO.getReg_id());
+        log.info(bDTO.getPoint());
+
+        model.addAttribute("board_notice",bDTO.getBoard_notice());
         model.addAttribute("board_title",bDTO.getBoard_title());
         model.addAttribute("board_content",bDTO.getBoard_content());
         model.addAttribute("board_count",bDTO.getBoard_count());
@@ -124,30 +149,20 @@ public class BoardController {
         model.addAttribute("reg_id",bDTO.getReg_id());
         model.addAttribute("board_seq",bDTO.getBoard_seq());
         model.addAttribute("chg_dt",bDTO.getChg_dt());
+        model.addAttribute("point",bDTO.getPoint());
 
-        // 페이징
-        int page = Integer.parseInt(request.getParameter("Pno"));
-        int listCnt = boardservice.TotalCount(); // 총 게시글 개수
+        HashMap<String, String> rMap = new HashMap<>();
+        rMap.put("board_seq", board_seq);
+        List<Board_ReviewDTO> rList = new ArrayList<>();
 
-        PagingDTO paging = new PagingDTO();
-
-        paging.pageInfo(page, listCnt);
-        HashMap<String, Integer> hMap = new HashMap<>();
-        int i = paging.getStartList();
-        int j = paging.getListSize();
-        hMap.put("startlist", i);
-        hMap.put("listsize", j);
-
-        List<BoardDTO> bList = new ArrayList<>();
         try {
-            bList = boardservice.getBoardList(hMap);
-            log.info(bList);
-        } catch(Exception e) {
+            rList = board_reviewService.getReviewList(rMap);
+            log.info(rList);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        model.addAttribute("bList",bList);
-        model.addAttribute("paging",paging);
+        log.info("rList : " + rList.size());
+        model.addAttribute("rList", rList);
 
         return "/board/boardDetail";
     }
@@ -185,6 +200,10 @@ public class BoardController {
         BoardDTO bDTO =new BoardDTO();
         bDTO.setBoard_seq(board_seq);
         bDTO=boardservice.boardDetail(bDTO);
+
+        List<MovieDTO> rList = movieService.getRank();
+
+        model.addAttribute("rList", rList);
         model.addAttribute("board_title",bDTO.getBoard_title());
         model.addAttribute("board_content",bDTO.getBoard_content());
         model.addAttribute("baord_notice",bDTO.getBoard_notice());
@@ -199,17 +218,20 @@ public class BoardController {
         String board_content=request.getParameter("board_content");
         String board_notice=request.getParameter("board_notice");
         String user_seq=(String)session.getAttribute("SS_userSeq");
+        String point=request.getParameter("point");
         BoardDTO bDTO=new BoardDTO();
         bDTO.setBoard_seq(board_seq);
         bDTO.setBoard_title(board_title);
         bDTO.setBoard_content(board_content);
         bDTO.setBoard_notice(board_notice);
         bDTO.setChg_id(user_seq);
+        bDTO.setPoint(point);
         log.info(board_seq);
         log.info(board_title);
         log.info(board_content);
         log.info(board_notice);
         log.info(user_seq);
+        log.info(point);
 
         String msg,url;
         int result=0;

@@ -8,6 +8,7 @@ public class BoardDTO {
     private String board_title;
     private String board_content;
     private String board_count;
+    private String point;
     private String reg_dt;
     private String reg_id;
     private String chg_dt;
@@ -59,6 +60,14 @@ public class BoardDTO {
 
     public void setBoard_count(String board_count) {
         this.board_count = board_count;
+    }
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
     }
 
     public String getReg_dt() {

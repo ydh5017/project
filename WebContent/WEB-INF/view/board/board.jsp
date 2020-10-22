@@ -51,6 +51,40 @@
     <link href="assets/css/board.css" rel="stylesheet">
     <link href="/summernote/summernote-bs4.css" rel="stylesheet">
 
+    <style>
+        .starR1 {
+            background:
+                    url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+                    no-repeat -52px 0;
+            background-size: auto 100%;
+            width: 15px;
+            height: 30px;
+            float: left;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+
+        .starR2 {
+            background:
+                    url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+                    no-repeat right 0;
+            background-size: auto 100%;
+            width: 15px;
+            height: 30px;
+            float: left;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+
+        .starR1.on {
+            background-position: 0 0;
+        }
+
+        .starR2.on {
+            background-position: -15px 0;
+        }
+    </style>
+
     <!-- =======================================================
     * Template Name: Company - v2.0.1
     * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
@@ -108,23 +142,38 @@
                         <div class="listTitle">영화</div>
                         <div class="listTitle">제목</div>
                         <div class="listWriter">작성자</div>
+                        <div class="listWriter">평점</div>
                         <div class="listWhen">작성일</div>
                         <div class="listReadCnt">조회수</div>
                     </div>
                     <%
                         for (int i = 0; i < bList.size(); i++) {
                             int number = paging.getListCnt() - i - ((paging.getPage() - 1) * 15);
+                            String POINT = bList.get(i).getPoint(); float point = Float.parseFloat(POINT);
                     %>
-                    <div class="listTag" style="color:red;background-color: #f5c6cb;">
                         <div class="listTag">
                             <div class="listNum"><%=number%>
                             </div>
                             <div class="listTitle"><%=bList.get(i).getBoard_notice() %>
                             </div>
-                            <div class="listTitle" onclick="location.href='boardDetail.do?no=<%=bList.get(i).getBoard_seq() %>&Pno=1'"><a href="#">
+                            <div class="listTitle" onclick="location.href='boardDetail.do?no=<%=bList.get(i).getBoard_seq() %>'">
                                     <%=bList.get(i).getBoard_title().replace(">","&gt;").replace("<","&lt;").replace("'","&#39;").replace("script", "")  %>
                             </div>
                             <div class="listWriter"><%=bList.get(i).getReg_id() %>
+                            </div>
+                            <div class="listWriter">
+                                <div class="star_area" id="star_area1<%=i%>" style="display: block">
+                                    <span class="starR1 on">별1_왼쪽</span>
+                                    <span class="starR2 <% if (point >= 2) { %> on <% } %>">별1_오른쪽</span>
+                                    <span class="starR1 <% if (point >= 3) { %> on <% } %>">별2_왼쪽</span>
+                                    <span class="starR2 <% if (point >= 4) { %> on <% } %>">별2_오른쪽</span>
+                                    <span class="starR1 <% if (point >= 5) { %> on <% } %>">별3_왼쪽</span>
+                                    <span class="starR2 <% if (point >= 6) { %> on <% } %>">별3_오른쪽</span>
+                                    <span class="starR1 <% if (point >= 7) { %> on <% } %>">별4_왼쪽</span>
+                                    <span class="starR2 <% if (point >= 8) { %> on <% } %>">별4_오른쪽</span>
+                                    <span class="starR1 <% if (point >= 9) { %> on <% } %>">별5_왼쪽</span>
+                                    <span class="starR2 <% if (point >= 10) { %> on <% } %>">별5_오른쪽</span>
+                                </div>
                             </div>
                             <div class="listWhen"><%=bList.get(i).getReg_dt() %>
                             </div>
@@ -153,7 +202,6 @@
                             <a class="pNumEnd" href="/board.do?Pno=<%=paging.getEndPage()+1%>">다음</a>
                             <%} %>
                         </div>
-                    </div>
                 </div>
             </div>
 

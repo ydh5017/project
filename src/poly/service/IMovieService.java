@@ -33,4 +33,5 @@ public interface IMovieService {
     public List<MovieDetailDTO> getMovieInfo(String mid) throws Exception;
 
     List<MovieDetailDTO> getMovieSerch(String keyword) throws Exception;
+
 }
