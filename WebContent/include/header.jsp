@@ -65,10 +65,11 @@
                 <li><a href="/mymovie.do">나의 영화</a></li>
                 <li><a href="/userDetail.do">마이페이지</a></li>
                 <% } %>
+                <li><a href="/board.do?Pno=1">평점/리뷰게시판</a></li>
+                <li><a href="/chat.do">실시간채팅</a></li>
                 <% if (userAss.equals("1")) {%>
                 <li><a href="/UserList.do?Pno=1">회원관리</a></li>
                 <% } %>
-                <li><a href="/board.do?Pno=1">평점/리뷰게시판</a></li>
 
             </ul>
         </nav><!-- .nav-menu -->
